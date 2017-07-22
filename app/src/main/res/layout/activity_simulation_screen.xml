@@ -4,14 +4,12 @@
     android:id="@+id/activity_simulation_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="itzik.com.simulationscreen.SimulationScreen">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+   <itzik.com.simulationscreen.board_view.BoardView
+       android:id="@+id/board"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+   </itzik.com.simulationscreen.board_view.BoardView>
+
 </RelativeLayout>
