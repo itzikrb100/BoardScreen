@@ -2,6 +2,8 @@ package itzik.com.simulationscreen.board_view;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import itzik.com.simulationscreen.R;
 import itzik.com.simulationscreen.Utils.UtilsDisplay;
 import itzik.com.simulationscreen.Utils.UtilsView;
 import itzik.com.simulationscreen.board.Board;
+import itzik.com.simulationscreen.board_view.callbacks.OnBoardCallback;
 
 /**
  * Created by itzik on 22/07/2017.
@@ -53,7 +56,7 @@ public class BoardView extends RelativeLayout {
     }
 
 
-    public void initView(Board b){
+    public void initView(Board b, final OnBoardCallback callback){
         Log.d(TAG, "initView:");
         this.board = b;
         RelativeLayout.LayoutParams PARAM = null;
@@ -96,6 +99,12 @@ public class BoardView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 generationPoints.redrawPointsGeneration(board.getSpaceBoard());
+                new  Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                         callback.onGenerateClick();
+                    }
+                });
             }
         });
         addView(generateButton,PARAM);
@@ -141,6 +150,18 @@ public class BoardView extends RelativeLayout {
         runButton.setTextSize(18);
         runButton.setText("Run");
         runButton.setBackground(getContext().getResources().getDrawable(R.drawable.grey_button));
+        runButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onRunClick();
+                    }
+                });
+
+            }
+        });
         addView(runButton,PARAM);
 
 
@@ -156,6 +177,18 @@ public class BoardView extends RelativeLayout {
         resultButton.setTextSize(18);
         resultButton.setText("Result");
         resultButton.setBackground(getContext().getResources().getDrawable(R.drawable.grey_button));
+        resultButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new  Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onResultClick();
+                    }
+                });
+
+            }
+        });
         addView(resultButton,PARAM);
 
     }

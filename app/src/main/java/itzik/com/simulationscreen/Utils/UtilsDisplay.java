@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.util.Locale;
+
 /**
  * Created by itzik on 22/07/2017.
  */
@@ -39,6 +41,11 @@ public class UtilsDisplay {
         return size;
     }
 
+
+
+    public static void updateLayoutDirectionByConfig(Context context, Locale locale) {
+        context.getResources().getConfiguration().setLayoutDirection(locale);
+    }
 
 
 
