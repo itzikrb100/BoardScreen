@@ -21,7 +21,7 @@ public class GenerationPointsView extends View {
 
     public static final String TAG = GenerationPointsView.class.getSimpleName();
 
-    private int row,col;
+    private int row,col,spaceSize;
     private PointState [][] points;
 
     public GenerationPointsView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -51,13 +51,23 @@ public class GenerationPointsView extends View {
     }
 
 
-    public void redrawPointsGeneration(SpaceBoard space){
-        this.points = space.getPoints();
-        row = space.getSearchSpace().getRows();
-        col = space.getSearchSpace().getColumns();
-        Log.d(TAG, "redrawPointsGeneration: row? "+space.getSearchSpace().getRows());
-        Log.d(TAG, "redrawPointsGeneration: col ? "+space.getSearchSpace().getColumns());
-        invalidate();
+    public void redrawPointsGeneration(final SpaceBoard space){
+
+        space.generateNewSpace(new SpaceBoard.SpaceBoardCallback() {
+            @Override
+            public void endGenerate(SpaceBoard spaceBoard) {
+                Log.d(TAG, "redrawPointsGeneration: endGenerate: ");
+                points = spaceBoard.getPoints();
+                row = spaceBoard.getSearchSpace().getRows();
+                col = spaceBoard.getSearchSpace().getColumns();
+                spaceSize = spaceBoard.getSearchSpace().getspaceSize();
+                Log.d(TAG, "redrawPointsGeneration: row? "+row);
+                Log.d(TAG, "redrawPointsGeneration: col ? "+col);
+                invalidate();
+            }
+        });
+
+        Log.d(TAG, "redrawPointsGeneration:");
     }
 
 
@@ -69,19 +79,20 @@ public class GenerationPointsView extends View {
 
 
     private void drawsPointsView(Canvas canvas){
+
         if(points == null)
             return;
 
         int h = getHeight();
         int w = getWidth();
-        final float spaceRaw = w/row;//convertDp2Px((float)(w/row));
-        final float spaceCol = /*h/col*/convertDp2Px((float)(h/col));
+        final float spaceRaw = h/row;
+        final float spaceCol = w/col;
         Log.d(TAG, String.format("drawsPointsView: h? %d\n w? %d\n spaceRaw? %f\n spaceCol? %f",h,
                                      w,spaceRaw,spaceCol));
         int sum_col = convertDp2Px(9f);
         int sum_raw = convertDp2Px(9f);
-        for(int i = 0 ;  i<row-1 ; i++){
-            for(int j = 0 ; j<col-1 ; j++){
+        for(int i = 0 ;  i<row ; i++){
+            for(int j = 0 ; j<col ; j++){
                 PointState point = points[i][j];
                 Log.d(TAG, "drawsPointsView: point? "+point+" ( x? "+(sum_raw)+" , y? "+sum_col+" )");
                 point.drawPoint(canvas,sum_raw,sum_col,convertDp2Px(6f));

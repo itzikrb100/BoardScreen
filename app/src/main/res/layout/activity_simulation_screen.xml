@@ -4,7 +4,7 @@
     android:id="@+id/activity_simulation_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itzik.com.simulationscreen.BoardNavigationScreen">
+    tools:context="itzik.com.simulationscreen.screens.BoardEmulatorNavigation">
 
    <itzik.com.simulationscreen.board_view.BoardView
        android:id="@+id/board"

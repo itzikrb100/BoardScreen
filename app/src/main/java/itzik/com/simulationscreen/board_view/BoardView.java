@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import itzik.com.simulationscreen.R;
 import itzik.com.simulationscreen.Utils.UtilsDisplay;
+import itzik.com.simulationscreen.Utils.UtilsPatterns;
 import itzik.com.simulationscreen.Utils.UtilsView;
 import itzik.com.simulationscreen.board.Board;
 import itzik.com.simulationscreen.board_view.callbacks.OnBoardCallback;
@@ -153,6 +154,7 @@ public class BoardView extends RelativeLayout {
         runButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                runButton.setEnabled(false);
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
@@ -193,6 +195,28 @@ public class BoardView extends RelativeLayout {
 
     }
 
+
+    public void setRunButtonEnable(boolean isEnable){
+        Log.d(TAG, "setRunButtonEnable: isEnable? "+isEnable);
+        runButton.setEnabled(isEnable);
+    }
+
+    public int getIterations(){
+
+        String text =  editIteration.getText().toString();
+        Log.d(TAG, "getIterations: text? "+text);
+        if(text == null || text.isEmpty() || !UtilsPatterns.isOnlyNumber(text)){
+            return 0;
+        }
+
+        int iterations = Integer.parseInt(text);
+        Log.d(TAG, "getIterations: iterations? "+iterations);
+        return iterations;
+    }
+
+    public Board getBoard(){
+        return board;
+    }
 
     private int convertDp2Px(float dp){
         return UtilsDisplay.convertDpScaleToPixelScale(getContext().getResources(),dp);
