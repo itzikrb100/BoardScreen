@@ -21,8 +21,8 @@ public class GenerationPointsView extends View {
 
     public static final String TAG = GenerationPointsView.class.getSimpleName();
 
-    private int row,col,spaceSize;
-    private PointState [][] points;
+    protected int row,col,spaceSize;
+    protected PointState [][] points;
 
     public GenerationPointsView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -46,8 +46,6 @@ public class GenerationPointsView extends View {
         int h = getHeight();//(int)(screenSize.y*0.9f);
         Log.d(TAG, String.format("initView: w? %d , h? %s",w,h));
         setBackgroundResource(R.drawable.frame_fragment);
-
-
     }
 
 
@@ -70,6 +68,17 @@ public class GenerationPointsView extends View {
         Log.d(TAG, "redrawPointsGeneration:");
     }
 
+
+
+    protected void redrawPointsNoneGeneration(final SpaceBoard spaceBoard){
+        points = spaceBoard.getPoints();
+        row = spaceBoard.getSearchSpace().getRows();
+        col = spaceBoard.getSearchSpace().getColumns();
+        spaceSize = spaceBoard.getSearchSpace().getspaceSize();
+        Log.d(TAG, "redrawPointsNoneGeneration: row? "+row);
+        Log.d(TAG, "redrawPointsNoneGeneration: col ? "+col);
+        invalidate();
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -96,6 +105,8 @@ public class GenerationPointsView extends View {
                 PointState point = points[i][j];
                 Log.d(TAG, "drawsPointsView: point? "+point+" ( x? "+(sum_raw)+" , y? "+sum_col+" )");
                 point.drawPoint(canvas,sum_raw,sum_col,convertDp2Px(6f));
+                point.setX(sum_raw);
+                point.setY(sum_col);
                 sum_raw+=spaceCol;
                 //point.drawPoint(canvas,);
                 //canvas.drawCircle(0,0,convertDp2Px(4),);

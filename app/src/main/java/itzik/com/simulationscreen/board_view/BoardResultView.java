@@ -27,8 +27,11 @@ public class BoardResultView extends RelativeLayout {
 
     private int ID_TITLE,ID_TABLE;
 
-    private final int COL_SOLUTION = 1;
+    private BoardResultCallback callback;
+
+    private final int COL_SOLUTION  = 1;
     private final int COL_ITERATION = 2;
+    private final int COL_PATH      = 3;
 
     private TextView title;
     private TableResult tableResult;
@@ -48,7 +51,7 @@ public class BoardResultView extends RelativeLayout {
 
 
 
-    public void initView(){
+    public void initView(final BoardResultCallback callback){
         initGenerateIDS();
         RelativeLayout.LayoutParams param = null;
 
@@ -70,7 +73,13 @@ public class BoardResultView extends RelativeLayout {
         param.addRule(RelativeLayout.ALIGN_LEFT,title.getId());
         tableResult = new TableResult(getContext());
         tableResult.setId(ID_TABLE);
-        tableResult.initTable();
+        tableResult.initTable(new TableResult.OnTableCallback(){
+            @Override
+            public void onShowPath(ResultProbSearch prob) {
+                Log.d(TAG, "onShowPath: prob? "+prob);
+                callback.onShowPath(prob);
+            }
+        });
         addView(tableResult,param);
 
         Log.d(TAG, "initView:");
@@ -84,7 +93,7 @@ public class BoardResultView extends RelativeLayout {
     }
 
 
-    private void updateTable(SparseArray<ResultProbSearch> results){
+    private void updateTable(final SparseArray<ResultProbSearch> results){
         Log.d(TAG, "updateTable:");
         ResultProbSearch rs = null;
         String find = null;
@@ -93,6 +102,7 @@ public class BoardResultView extends RelativeLayout {
         find = "No";
         if(rs.isFind()){
             find = " Yes";
+            tableResult.setEnableRow1Path(true);
         }
         tableResult.setRow1Text(COL_SOLUTION,find);
         tableResult.setRow1Text(COL_ITERATION,rs.getSolutionIterations()+"");
@@ -104,10 +114,22 @@ public class BoardResultView extends RelativeLayout {
         find = "No";
         if(rs.isFind()){
             find = " Yes";
+            tableResult.setEnableRow2Path(true);
         }
         tableResult.setRow2Text(COL_SOLUTION,find);
         tableResult.setRow2Text(COL_ITERATION,rs.getSolutionIterations()+"");
 
+
+
+        rs = results.get(TYPE_ALGO.HeursticDistanceToGoal.ordinal());
+        Log.d(TAG, "updateTable: TYPE_ALGO.HeursticDistanceToGoal");
+        find = "No";
+        if(rs.isFind()){
+            find = " Yes";
+            tableResult.setEnableRow3Path(true);
+        }
+        tableResult.setRow3Text(COL_SOLUTION,find);
+        tableResult.setRow3Text(COL_ITERATION,rs.getSolutionIterations()+"");
 
 
 
@@ -115,9 +137,11 @@ public class BoardResultView extends RelativeLayout {
         find = "No";
         if(rs.isFind()){
             find = " Yes";
+            tableResult.setEnableRow4Path(true);
         }
         tableResult.setRow4Text(COL_SOLUTION,find);
         tableResult.setRow4Text(COL_ITERATION,rs.getSolutionIterations()+"");
+        tableResult.setResults(results);
     }
 
     private void initGenerateIDS(){
@@ -129,6 +153,12 @@ public class BoardResultView extends RelativeLayout {
 
     private int convertDp2Px(float dp){
         return UtilsDisplay.convertDpScaleToPixelScale(getContext().getResources(),dp);
+    }
+
+
+
+    public interface BoardResultCallback{
+        void onShowPath(ResultProbSearch resultProbSearch);
     }
 
 

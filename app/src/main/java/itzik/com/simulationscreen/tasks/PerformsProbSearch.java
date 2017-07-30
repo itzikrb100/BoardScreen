@@ -5,26 +5,31 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 import itzik.com.simulationscreen.represent.search_algoritems.AStar;
 import itzik.com.simulationscreen.represent.search_algoritems.BFS;
 import itzik.com.simulationscreen.represent.search_algoritems.DFS;
+import itzik.com.simulationscreen.represent.search_algoritems.HeursticDistanceToGoal;
 
 /**
  * Created by itzik on 26/07/2017.
  */
 
-public class PerformsProbSearch extends AsyncTask<TaskInfo,Void,SparseArray<ResultProbSearch>> {
+public class PerformsProbSearch extends AsyncTask<TaskInfo,Integer,SparseArray<ResultProbSearch>> {
 
     public static final String TAG = "PerformsProblemsSearch";
 
     private PerformProbSearchCallback callback;
+    private ProgressBar progressBar;
 
-    public PerformsProbSearch(PerformProbSearchCallback callback){
+
+    public PerformsProbSearch(ProgressBar progressBar,PerformProbSearchCallback callback){
         Log.d(TAG, "PerformsProblemsSearch:");
         this.callback = callback;
+        this.progressBar = progressBar;
     }
 
 
@@ -42,6 +47,14 @@ public class PerformsProbSearch extends AsyncTask<TaskInfo,Void,SparseArray<Resu
     }
 
     @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        int currentProgress = values[0];
+        Log.d(TAG, "onProgressUpdate: progress? "+currentProgress);
+        progressBar.setProgress(currentProgress);
+    }
+
+    @Override
     protected void onPreExecute() {
         super.onPreExecute();
         Log.d(TAG, "onPreExecute:");
@@ -52,6 +65,9 @@ public class PerformsProbSearch extends AsyncTask<TaskInfo,Void,SparseArray<Resu
         final TaskInfo info = params[0];
         ArrayList<PointPath> path = null;
         ResultProbSearch temp;
+        int sum_progress = 0 ;
+        final int progress = 100/TYPE_ALGO.values().length;
+        Log.d(TAG, "doInBackground: progess? "+progress);
         int find;
         Log.d(TAG, "doInBackground: info task ? "+info);
         final SparseArray<ResultProbSearch> results = new SparseArray<>();
@@ -64,7 +80,8 @@ public class PerformsProbSearch extends AsyncTask<TaskInfo,Void,SparseArray<Resu
         Log.d(TAG, "doInBackground: BFS find? "+find);
         temp.setSolutionIterations(find);
         temp.setIterations(info.getIterations());
-
+        sum_progress+=progress;
+        publishProgress(sum_progress);
 
         //dfs
         temp = results.get(TYPE_ALGO.DFS.ordinal());
@@ -73,7 +90,8 @@ public class PerformsProbSearch extends AsyncTask<TaskInfo,Void,SparseArray<Resu
         Log.d(TAG, "doInBackground: DFS find? "+find);
         temp.setSolutionIterations(find);
         temp.setIterations(info.getIterations());
-
+        sum_progress+=progress;
+        publishProgress(sum_progress);
 
 
         //Astar
@@ -83,6 +101,20 @@ public class PerformsProbSearch extends AsyncTask<TaskInfo,Void,SparseArray<Resu
         Log.d(TAG, "doInBackground: A_STAR find? "+find);
         temp.setSolutionIterations(find);
         temp.setIterations(info.getIterations());
+        sum_progress+=progress;
+        publishProgress(sum_progress);
+
+
+        //Astar HeursticDistanceToGoal ,
+        temp = results.get(TYPE_ALGO.HeursticDistanceToGoal.ordinal());
+        path = temp.getPath();
+        find = HeursticDistanceToGoal.performHeursticDistanceToGoal(info.getSearchSpace()
+                ,path,info.getIterations());
+        Log.d(TAG, "doInBackground: A_STAR ,HeursticDistanceToGoal find? "+find);
+        temp.setSolutionIterations(find);
+        temp.setIterations(info.getIterations());
+        sum_progress+= 100 - sum_progress;
+        publishProgress(sum_progress);
 
         return results;
     }

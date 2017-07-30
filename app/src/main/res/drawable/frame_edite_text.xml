@@ -15,7 +15,7 @@
         android:color="@color/frame_stroke"/>
 
     <solid
-        android:color="@color/frame_solid"/>
+        android:color="@color/white"/>
 
 
     <corners

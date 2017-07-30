@@ -18,6 +18,7 @@ public class PointState {
 
     private Node node;
     private int color;
+    private float x,y;
 
 
     public PointState(Node node){
@@ -32,6 +33,23 @@ public class PointState {
         paint.setAntiAlias(true);
         paint.setColor(color);
         canvas.drawCircle(x,y,rad,paint);
+    }
+
+
+    public void setX(float x){
+        this.x = x;
+    }
+
+    public void setY(float y){
+        this.y = y;
+    }
+
+    public float getY(){
+        return y;
+    }
+
+    public float getX(){
+        return x;
     }
 
      @Override

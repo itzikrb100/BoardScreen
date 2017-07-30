@@ -96,6 +96,8 @@ public class ResultProbSearch implements Parcelable {
     }
 
 
+
+
     private void  readFromParcel(Parcel in) {
 
         // We just need to read back each

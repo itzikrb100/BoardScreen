@@ -13,7 +13,7 @@ public class BFS {
 	private static NodeQueue[] queue;
 	private static NodeQueue[] fringe;
 	
-	public static int performBFS(SearchSpace space, ArrayList<PointPath> path /*int[][] path*/, int iterations)
+	public static int performBFS(SearchSpace space, ArrayList<PointPath> path, int iterations)
 	{
 		insertStartNode(space);
 		fringe = new NodeQueue[space.getspaceSize()];
@@ -29,10 +29,10 @@ public class BFS {
 				return -1;
 			if(fringe[i].getNode().getStatus().equals(NodeStatus.Goal))
 			{
-				System.out.println(fringe[i].getRow()+" "+fringe[i].getColumn());
+				//System.out.println(fringe[i].getRow()+" "+fringe[i].getColumn());
 				//fill path
 				calculatePath(path);
-				return i;
+				return (i+1);
 			}
 			CalculateNext(space,fringe[i]);
 		}
@@ -49,12 +49,14 @@ public class BFS {
 				continue;
 			else
 			{
+//				path[pathRow][0] = fringe[i].getRow();
+//				path[pathRow][1] = fringe[i].getColumn();
+
 				PointPath p = new PointPath();
-				//path[pathRow][0] = fringe[i].getRow();
-				//path[pathRow][1] = fringe[i].getColumn();
 				p.setRow(fringe[i].getRow());
 				p.setCol(fringe[i].getColumn());
 				path.add(p);
+
 				NodeQueue temp = fringe[i].getParentNode();
 				int place = findNodeQueuePlace(temp);
 				i = place+1;		
@@ -80,14 +82,14 @@ public class BFS {
 		int row = fringe.getRow();
 		int column = fringe.getColumn();
 		
-		if((row-1)>=0 && (column-1)>=0)
-		{
-			Node temp = space.getSpace()[row-1][column-1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column-1))
-			{
-				QueueAdd(temp,row-1,column-1,fringe);
-			}
-		}
+//		if((row-1)>=0 && (column-1)>=0)
+//		{
+//			Node temp = space.getSpace()[row-1][column-1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column-1))
+//			{
+//				QueueAdd(temp,row-1,column-1,fringe);
+//			}
+//		}
 		
 		if((row-1)>=0)
 		{
@@ -98,14 +100,14 @@ public class BFS {
 			}
 		}
 		
-		if((row-1)>=0 && (column+1)<(space.getColumns()))
-		{
-			Node temp = space.getSpace()[row-1][column+1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column+1))
-			{
-				QueueAdd(temp,row-1,column+1,fringe);
-			}
-		}
+//		if((row-1)>=0 && (column+1)<(space.getColumns()))
+//		{
+//			Node temp = space.getSpace()[row-1][column+1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column+1))
+//			{
+//				QueueAdd(temp,row-1,column+1,fringe);
+//			}
+//		}
 		
 		if((column-1)>=0)
 		{
@@ -125,14 +127,14 @@ public class BFS {
 			}
 		}
 		
-		if((row+1)<(space.getRows()) && (column-1)>=0)
-		{
-			Node temp = space.getSpace()[row+1][column-1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column-1))
-			{
-				QueueAdd(temp,row+1,column-1,fringe);
-			}
-		}
+//		if((row+1)<(space.getRows()) && (column-1)>=0)
+//		{
+//			Node temp = space.getSpace()[row+1][column-1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column-1))
+//			{
+//				QueueAdd(temp,row+1,column-1,fringe);
+//			}
+//		}
 		
 		if((row+1)<(space.getRows()))
 		{
@@ -143,14 +145,14 @@ public class BFS {
 			}
 		}
 		
-		if((row+1)<(space.getRows()) && (column+1)<(space.getColumns()))
-		{
-			Node temp = space.getSpace()[row+1][column+1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column+1))
-			{
-				QueueAdd(temp,row+1,column+1,fringe);
-			}
-		}
+//		if((row+1)<(space.getRows()) && (column+1)<(space.getColumns()))
+//		{
+//			Node temp = space.getSpace()[row+1][column+1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column+1))
+//			{
+//				QueueAdd(temp,row+1,column+1,fringe);
+//			}
+//		}
 	}
 
 	private static void QueueAdd(Node temp, int row, int column, NodeQueue parent) {

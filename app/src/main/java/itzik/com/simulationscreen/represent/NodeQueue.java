@@ -49,6 +49,6 @@ public class NodeQueue {
 	public void setParentNode(NodeQueue parent) {
 		ParentNode = parent;
 	}
-	
+
 	
 }

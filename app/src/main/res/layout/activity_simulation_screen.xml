@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="itzik.com.simulationscreen.screens.BoardEmulatorNavigation">
 
+
+   <ProgressBar
+       android:id="@+id/waitingBar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+       android:layout_centerInParent="true"
+       android:max="100" /><!--set 100 maximum value for the progress bar-->
+
    <itzik.com.simulationscreen.board_view.BoardView
        android:id="@+id/board"
        android:layout_width="match_parent"

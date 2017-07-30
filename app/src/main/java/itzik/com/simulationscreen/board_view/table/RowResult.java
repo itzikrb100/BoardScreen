@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import itzik.com.simulationscreen.Utils.UtilsDisplay;
 import itzik.com.simulationscreen.Utils.UtilsView;
+import itzik.com.simulationscreen.tasks.ResultProbSearch;
 
 /**
  * Created by itzik on 23/07/2017.
@@ -24,6 +25,7 @@ public class RowResult extends TableRow {
     private int ID_1_ROW,ID_2_ROW,ID_3_ROW,ID_4_ROW;
     private TextView text_1,text_2,text_3;
     private Button path;
+    private ResultProbSearch solution;
 
 
 
@@ -52,13 +54,20 @@ public class RowResult extends TableRow {
         path.setText(text);
     }
 
+    public void setPathEnable(boolean is){
+        path.setEnabled(is);
+    }
 
     public void setVisiblePath(int visible){
         path.setVisibility(visible);
     }
 
 
-    public void initRow(){
+    public void setResultProbSearch(ResultProbSearch solution){
+        this.solution = solution;
+    }
+
+    public void initRow(final RowResultCallback callback){
         initGenerateIDS();
         TableRow.LayoutParams PARAM = null;
 
@@ -94,9 +103,10 @@ public class RowResult extends TableRow {
         path.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                   callback.onShowPath(text_1.getText().toString());
             }
         });
+        path.setEnabled(false);
         addView(path);
         Log.d(TAG, "initRow:");
     }
@@ -112,5 +122,10 @@ public class RowResult extends TableRow {
         ID_3_ROW = UtilsView.generateViewId();
         ID_4_ROW = UtilsView.generateViewId();
         Log.d(TAG, "initGenerateIDS:");
+    }
+
+
+    public interface RowResultCallback{
+        void onShowPath(String algo);
     }
 }

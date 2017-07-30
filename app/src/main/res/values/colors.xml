@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name ="frame_stroke">#00D7FE</color>
     <color name ="frame_solid">#032250</color>
+    <color name ="white">@android:color/white</color>
 </resources>

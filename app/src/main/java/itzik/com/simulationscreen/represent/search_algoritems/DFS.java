@@ -29,10 +29,10 @@ public class DFS {
 				return -1;
 			if(fringe[i].getNode().getStatus().equals(NodeStatus.Goal))
 			{
-				System.out.println(fringe[i].getRow()+" "+fringe[i].getColumn());
+				//System.out.println(fringe[i].getRow()+" "+fringe[i].getColumn());
 				//fill path
 				calculatePath(path);
-				return i;
+				return (i+1);
 			}
 			CalculateNext(space,fringe[i]);
 		}
@@ -49,12 +49,13 @@ public class DFS {
 				continue;
 			else
 			{
+//				path[pathRow][0] = fringe[i].getRow();
+//				path[pathRow][1] = fringe[i].getColumn();
+
 				PointPath p = new PointPath();
 				p.setRow(fringe[i].getRow());
 				p.setCol(fringe[i].getColumn());
 				path.add(p);
-				//path[pathRow][0] = fringe[i].getRow();
-				//path[pathRow][1] = fringe[i].getColumn();
 				
 				NodeQueue temp = fringe[i].getParentNode();
 				int place = findNodeQueuePlace(temp);
@@ -81,14 +82,14 @@ public class DFS {
 		int row = fringe.getRow();
 		int column = fringe.getColumn();
 		
-		if((row-1)>=0 && (column-1)>=0)
-		{
-			Node temp = space.getSpace()[row-1][column-1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column-1))
-			{
-				QueueAdd(temp,row-1,column-1,fringe);
-			}
-		}
+//		if((row-1)>=0 && (column-1)>=0)
+//		{
+//			Node temp = space.getSpace()[row-1][column-1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column-1))
+//			{
+//				QueueAdd(temp,row-1,column-1,fringe);
+//			}
+//		}
 		
 		if((row-1)>=0)
 		{
@@ -99,14 +100,14 @@ public class DFS {
 			}
 		}
 		
-		if((row-1)>=0 && (column+1)<(space.getColumns()))
-		{
-			Node temp = space.getSpace()[row-1][column+1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column+1))
-			{
-				QueueAdd(temp,row-1,column+1,fringe);
-			}
-		}
+//		if((row-1)>=0 && (column+1)<(space.getColumns()))
+//		{
+//			Node temp = space.getSpace()[row-1][column+1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row-1,column+1))
+//			{
+//				QueueAdd(temp,row-1,column+1,fringe);
+//			}
+//		}
 		
 		if((column-1)>=0)
 		{
@@ -126,14 +127,14 @@ public class DFS {
 			}
 		}
 		
-		if((row+1)<(space.getRows()) && (column-1)>=0)
-		{
-			Node temp = space.getSpace()[row+1][column-1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column-1))
-			{
-				QueueAdd(temp,row+1,column-1,fringe);
-			}
-		}
+//		if((row+1)<(space.getRows()) && (column-1)>=0)
+//		{
+//			Node temp = space.getSpace()[row+1][column-1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column-1))
+//			{
+//				QueueAdd(temp,row+1,column-1,fringe);
+//			}
+//		}
 		
 		if((row+1)<(space.getRows()))
 		{
@@ -144,14 +145,14 @@ public class DFS {
 			}
 		}
 		
-		if((row+1)<(space.getRows()) && (column+1)<(space.getColumns()))
-		{
-			Node temp = space.getSpace()[row+1][column+1];
-			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column+1))
-			{
-				QueueAdd(temp,row+1,column+1,fringe);
-			}
-		}
+//		if((row+1)<(space.getRows()) && (column+1)<(space.getColumns()))
+//		{
+//			Node temp = space.getSpace()[row+1][column+1];
+//			if(!temp.getStatus().equals(NodeStatus.Restricted) && !FringeContains(row+1,column+1))
+//			{
+//				QueueAdd(temp,row+1,column+1,fringe);
+//			}
+//		}
 	}
 
 	private static void QueueAdd(Node temp, int row, int column, NodeQueue parent) {

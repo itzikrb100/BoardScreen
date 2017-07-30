@@ -7,22 +7,20 @@ public class SearchSpace {
 	private int rows;
 	private int columns;
 
-	public SearchSpace(int rows,int columns)
+	public SearchSpace(int rows, int columns)
 	{
 		space = new Node[rows][columns];
 		spaceSize = rows*columns;
 		this.rows = rows ;
 		this.columns = columns;
 	}
-
-
-
 	public Node[][] getSpace() {
 		return space;
 	}
 	
 	public void generate()
 	{
+
 		initSpace();
 		int row,column;
 		
@@ -41,7 +39,7 @@ public class SearchSpace {
 		
 		this.setNodestatus(this, row, column, NodeStatus.Goal);
 		
-		int restrictedNumber = (int)(this.getspaceSize()*0.3) ; 
+		int restrictedNumber = (int)(this.getspaceSize()*0.3) ; //percentage of the restricted
 		while(restrictedNumber != 0)
 		{
 			do{
@@ -54,117 +52,117 @@ public class SearchSpace {
 			restrictedNumber--;
 		}
 		
-		/**
-		this.setNodestatus(this, 0, 0, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 0, 1, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 0, 2, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 0, 3, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 0, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 0, 5, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 0, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 0, 7, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 0, 8, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 0, 9, com.itzikdev.NodeStatus.Allowed);
 		
-		this.setNodestatus(this, 1, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 1, 1, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 1, 2, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 1, 3, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 1, 4, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 1, 5, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 1, 6, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 1, 7, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 1, 8, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 1, 9, com.itzikdev.NodeStatus.Allowed);
+//		this.setNodestatus(this, 0, 0, NodeStatus.Restricted);
+//		this.setNodestatus(this, 0, 1, NodeStatus.Restricted);
+//		this.setNodestatus(this, 0, 2, NodeStatus.Restricted);
+//		this.setNodestatus(this, 0, 3, NodeStatus.Restricted);
+//		this.setNodestatus(this, 0, 4, NodeStatus.Allowed);
+//		this.setNodestatus(this, 0, 5, NodeStatus.Restricted);
+//		this.setNodestatus(this, 0, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 0, 7, NodeStatus.Restricted);
+//		this.setNodestatus(this, 0, 8, NodeStatus.Allowed);
+//		this.setNodestatus(this, 0, 9, NodeStatus.Allowed);
+//		
+//		this.setNodestatus(this, 1, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 1, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 2, NodeStatus.Start);
+//		this.setNodestatus(this, 1, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 4, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 7, NodeStatus.Allowed);
+//		this.setNodestatus(this, 1, 8, NodeStatus.Restricted);
+//		this.setNodestatus(this, 1, 9, NodeStatus.Allowed);
+//		
+//		this.setNodestatus(this, 2, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 2, 1, NodeStatus.Allowed);
+//		this.setNodestatus(this, 2, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 2, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 2, 4, NodeStatus.Restricted);
+//		this.setNodestatus(this, 2, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 2, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 2, 7, NodeStatus.Restricted);
+//		this.setNodestatus(this, 2, 8, NodeStatus.Restricted);
+//		this.setNodestatus(this, 2, 9, NodeStatus.Allowed);
+//	
+//		this.setNodestatus(this, 3, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 3, 1, NodeStatus.Allowed);
+//		this.setNodestatus(this, 3, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 3, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 3, 4, NodeStatus.Allowed);
+//		this.setNodestatus(this, 3, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 3, 6, NodeStatus.Restricted);
+//		this.setNodestatus(this, 3, 7, NodeStatus.Restricted);
+//		this.setNodestatus(this, 3, 8, NodeStatus.Restricted);
+//		this.setNodestatus(this, 3, 9, NodeStatus.Allowed);
+//	
+//		this.setNodestatus(this, 4, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 4, 1, NodeStatus.Allowed);
+//		this.setNodestatus(this, 4, 2, NodeStatus.Restricted);
+//		this.setNodestatus(this, 4, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 4, 4, NodeStatus.Restricted);
+//		this.setNodestatus(this, 4, 5, NodeStatus.Restricted);
+//		this.setNodestatus(this, 4, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 4, 7, NodeStatus.Restricted);
+//		this.setNodestatus(this, 4, 8, NodeStatus.Restricted);
+//		this.setNodestatus(this, 4, 9, NodeStatus.Allowed);
+//		
+//		this.setNodestatus(this, 5, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 5, 1, NodeStatus.Restricted);
+//		this.setNodestatus(this, 5, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 5, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 5, 4, NodeStatus.Restricted);
+//		this.setNodestatus(this, 5, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 5, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 5, 7, NodeStatus.Restricted);
+//		this.setNodestatus(this, 5, 8, NodeStatus.Allowed);
+//		this.setNodestatus(this, 5, 9, NodeStatus.Allowed);
+//		
+//		this.setNodestatus(this, 6, 0, NodeStatus.Restricted);
+//		this.setNodestatus(this, 6, 1, NodeStatus.Restricted);
+//		this.setNodestatus(this, 6, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 4, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 7, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 8, NodeStatus.Allowed);
+//		this.setNodestatus(this, 6, 9, NodeStatus.Restricted);
+//		
+//		this.setNodestatus(this, 7, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 1, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 3, NodeStatus.Goal);
+//		this.setNodestatus(this, 7, 4, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 7, NodeStatus.Restricted);
+//		this.setNodestatus(this, 7, 8, NodeStatus.Allowed);
+//		this.setNodestatus(this, 7, 9, NodeStatus.Allowed);
+//		
+//		this.setNodestatus(this, 8, 0, NodeStatus.Restricted);
+//		this.setNodestatus(this, 8, 1, NodeStatus.Restricted);
+//		this.setNodestatus(this, 8, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 8, 3, NodeStatus.Restricted);
+//		this.setNodestatus(this, 8, 4, NodeStatus.Restricted);
+//		this.setNodestatus(this, 8, 5, NodeStatus.Restricted);
+//		this.setNodestatus(this, 8, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 8, 7, NodeStatus.Allowed);
+//		this.setNodestatus(this, 8, 8, NodeStatus.Allowed);
+//		this.setNodestatus(this, 8, 9, NodeStatus.Allowed);
+//		
+//		this.setNodestatus(this, 9, 0, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 1, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 2, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 3, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 4, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 5, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 6, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 7, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 8, NodeStatus.Allowed);
+//		this.setNodestatus(this, 9, 9, NodeStatus.Allowed);
 		
-		this.setNodestatus(this, 2, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 2, 1, com.itzikdev.NodeStatus.Start);
-		this.setNodestatus(this, 2, 2, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 2, 3, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 2, 4, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 2, 5, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 2, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 2, 7, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 2, 8, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 2, 9, com.itzikdev.NodeStatus.Allowed);
-	
-		this.setNodestatus(this, 3, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 1, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 2, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 3, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 5, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 7, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 8, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 3, 9, com.itzikdev.NodeStatus.Allowed);
-	
-		this.setNodestatus(this, 4, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 4, 1, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 4, 2, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 4, 3, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 4, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 4, 5, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 4, 6, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 4, 7, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 4, 8, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 4, 9, com.itzikdev.NodeStatus.Allowed);
-		
-		this.setNodestatus(this, 5, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 5, 1, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 5, 2, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 5, 3, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 5, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 5, 5, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 5, 6, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 5, 7, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 5, 8, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 5, 9, com.itzikdev.NodeStatus.Allowed);
-		
-		this.setNodestatus(this, 6, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 6, 1, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 6, 2, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 6, 3, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 6, 4, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 6, 5, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 6, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 6, 7, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 6, 8, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 6, 9, com.itzikdev.NodeStatus.Allowed);
-		
-		this.setNodestatus(this, 7, 0, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 7, 1, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 7, 2, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 7, 3, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 7, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 7, 5, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 7, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 7, 7, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 7, 8, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 7, 9, com.itzikdev.NodeStatus.Allowed);
-		
-		this.setNodestatus(this, 8, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 8, 1, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 8, 2, com.itzikdev.NodeStatus.Goal);
-		this.setNodestatus(this, 8, 3, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 8, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 8, 5, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 8, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 8, 7, com.itzikdev.NodeStatus.Restricted);
-		this.setNodestatus(this, 8, 8, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 8, 9, com.itzikdev.NodeStatus.Allowed);
-		
-		this.setNodestatus(this, 9, 0, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 1, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 2, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 3, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 4, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 5, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 6, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 7, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 8, com.itzikdev.NodeStatus.Allowed);
-		this.setNodestatus(this, 9, 9, com.itzikdev.NodeStatus.Allowed);
-		**/
 		
 	}
 
@@ -186,7 +184,6 @@ public class SearchSpace {
 		return columns;
 	}
 
-	@Override
 	public String toString()
 	{
 		String s = "";

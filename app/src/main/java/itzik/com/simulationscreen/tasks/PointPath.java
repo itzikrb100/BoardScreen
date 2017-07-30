@@ -65,7 +65,6 @@ public class PointPath implements Parcelable {
         // written to the parcel
         this.row = in.readInt();
         this.col = in.readInt();
-
         Log.d(TAG,String.format("readFromParcel: row ? %d ? \ncol ? %d \n"
                 ,row,col));
     }

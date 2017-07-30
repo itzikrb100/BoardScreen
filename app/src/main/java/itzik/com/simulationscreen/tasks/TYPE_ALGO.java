@@ -19,12 +19,17 @@ public enum TYPE_ALGO {
     },
     IDFS{
         public String toString() {
-            return "BFS";
+            return "IDFS";
         }
     },
     A_STAR{
         public String toString() {
             return "A*";
+        }
+    },
+    HeursticDistanceToGoal{
+        public String toString() {
+            return "A*,HD ";
         }
     }
 }
