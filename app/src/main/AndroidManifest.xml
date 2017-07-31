@@ -21,7 +21,8 @@
         </activity>
 
 
-        <activity android:name=".screens.ResultActivity">
+        <activity android:name=".screens.ResultActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

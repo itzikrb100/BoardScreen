@@ -212,7 +212,7 @@ public class TableResult extends TableLayout {
                 });
             }
         });
-        row3.setRow1Text("A*,HD");
+        row3.setRow1Text("A*,Diagonal");
         row3.setRow4Text("Show");
         addView(row3);
 
@@ -232,7 +232,7 @@ public class TableResult extends TableLayout {
                 });
             }
         });
-        row4.setRow1Text("A*");
+        row4.setRow1Text("A*,Greedy");
         row4.setRow4Text("Show");
         addView(row4);
 

@@ -24,12 +24,12 @@ public enum TYPE_ALGO {
     },
     A_STAR{
         public String toString() {
-            return "A*";
+            return "A*,Greedy";
         }
     },
     HeursticDistanceToGoal{
         public String toString() {
-            return "A*,HD ";
+            return "A*,Diagonal";
         }
     }
 }
